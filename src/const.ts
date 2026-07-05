@@ -1,1 +1,1 @@
-export const APP_NAME = "LexImmigra";
+export const LOGIN_PATH = "/login";
