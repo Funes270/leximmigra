@@ -46,7 +46,8 @@ export const scadenzeRouter = createRouter({
       const db = getDb();
       const giorni = input?.giorni ?? 30;
       const oggi = new Date();
-      const futuro = new Date(oggi.getTime() + giorni * 24 * 60 * 60 * 1000);
+      const futuro = new Date();
+      futuro.setDate(oggi.getDate() + giorni);
 
       const items = await db
         .select()

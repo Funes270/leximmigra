@@ -106,6 +106,7 @@ export const protezioneRouter = createRouter({
       const { id, data } = input;
       const updateData = { ...data };
       
+      // Convert date strings to Date objects
       const dateFields = ["dataPresentazioneDomanda", "dataIntervista", "dataDecisione", "dataPresentazioneAppello",
         "dataIngressoAccoglienza", "dataUscitaAccoglienza"];
       for (const field of dateFields) {
