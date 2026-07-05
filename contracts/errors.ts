@@ -1,29 +1,15 @@
-import { TRPCError } from "@trpc/server";
+type AppError = { tag: "app_error"; status: number; message: string };
 
-export function throwUnauthorized(message?: string): never {
-  throw new TRPCError({
-    code: "UNAUTHORIZED",
-    message: message ?? "Unauthorized",
-  });
+function appError(status: number, message: string): AppError {
+  return { tag: "app_error", status, message };
 }
 
-export function throwForbidden(message?: string): never {
-  throw new TRPCError({
-    code: "FORBIDDEN",
-    message: message ?? "Forbidden",
-  });
-}
+export const Errors = {
+  badRequest: (msg: string) => appError(400, msg),
+  unauthorized: (msg: string) => appError(401, msg),
+  forbidden: (msg: string) => appError(403, msg),
+  notFound: (msg: string) => appError(404, msg),
+  internal: (msg: string) => appError(500, msg),
+} as const;
 
-export function throwBadRequest(message?: string): never {
-  throw new TRPCError({
-    code: "BAD_REQUEST",
-    message: message ?? "Bad Request",
-  });
-}
-
-export function throwNotFound(message?: string): never {
-  throw new TRPCError({
-    code: "NOT_FOUND",
-    message: message ?? "Not Found",
-  });
-}
+export type { AppError };
